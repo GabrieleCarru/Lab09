@@ -2,12 +2,15 @@ package it.polito.tdp.borders.model;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.traverse.BreadthFirstIterator;
+import org.jgrapht.traverse.GraphIterator;
 
 import it.polito.tdp.borders.db.BordersDAO;
 
@@ -82,5 +85,38 @@ public class Model {
 		ci = new ConnectivityInspector<Country, DefaultEdge>(graph);
 		return ci.connectedSets().size();
 	}
+	
+	// Esercizio 2 - lista di tutti i nodi raggiungibili nel grafo a partire da uno selezionato
+	
+	//  3 POSSIBILI APPROCCI: 
+	//	a) JGraphT	 	b) ricorsione (visita in profondità)		c)algoritmo iterativo (Da vedere - visti)
+	
+	// 1. JGraphT (Più semplice)
+	
+	public List<Country> getNeighboursCointries(Country selectedCountry) {
+		return this.showAllNeighboursJGraphT(selectedCountry);
+	}
+	
+	private List<Country> showAllNeighboursJGraphT(Country selectedCountry) {
+		List<Country> visited = new LinkedList<Country>();
+		
+		// Uso BreadthFirstIterator
+		GraphIterator<Country, DefaultEdge> bfv;
+		bfv = new BreadthFirstIterator<Country, DefaultEdge>(graph, selectedCountry);
+		
+		while(bfv.hasNext()) {
+			visited.add(bfv.next());
+		}
+		
+		return visited;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
