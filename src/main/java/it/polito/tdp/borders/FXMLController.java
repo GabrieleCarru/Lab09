@@ -3,6 +3,7 @@ package it.polito.tdp.borders;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.borders.model.Country;
@@ -45,6 +46,11 @@ public class FXMLController {
     	
     	txtResult.appendText(String.format("Number of connected components: %d \n", 
     									model.getNumberOfConnectedComponents()));
+    	
+    	Map<Country, Integer> stats = model.getCountryCounts();
+    	for(Country c : stats.keySet()) {
+    		txtResult.appendText(String.format("%s %d \n", c, stats.get(c)));
+    	}
     	
     }
 
