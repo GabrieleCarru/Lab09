@@ -2,8 +2,10 @@
 package it.polito.tdp.borders;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.borders.model.Country;
 import it.polito.tdp.borders.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +30,22 @@ public class FXMLController {
 
     @FXML
     void doCalcolaConfini(ActionEvent event) {
-
+    	txtResult.clear();
+    	
+    	int anno = Integer.parseInt(txtAnno.getText());
+    	
+    	// Verifica sulla validità dell'anno
+    	if(anno < 1816 || anno > 2016) {
+    		txtResult.setText("Please enter a year between 1816 and 2016.");
+    		return;
+    	}
+    	
+    	model.creaGrafo(anno);
+    	List<Country> countries = model.getCountries();
+    	
+    	txtResult.appendText(String.format("Number of connected components: %d \n", 
+    									model.getNumberOfConnectedComponents()));
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

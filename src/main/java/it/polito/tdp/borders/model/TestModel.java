@@ -6,7 +6,11 @@ public class TestModel {
 
 		Model model = new Model();
 
-		System.out.println("TestModel -- TODO");
+		System.out.println("Creo il grafo relativo all'anno 1914: \n");
+		model.creaGrafo(1914);
+		
+		System.out.println("Grafo creato! #Vertici = " + model.countVertex() 
+									+ " #Archi = " + model.countEdge());
 		
 //		System.out.println("Creo il grafo relativo al 2000");
 //		model.createGraph(2000);
